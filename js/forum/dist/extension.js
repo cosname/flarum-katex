@@ -12,7 +12,7 @@ System.register('cosname/katex/main', ['flarum/extend', 'flarum/components/Comme
     }],
     execute: function () {
 
-      app.initializers.add('cosname/katex', function () {
+      app.initializers.add('cosname-katex', function () {
         // on every post loading
         extend(CommentPost.prototype, 'config', function () {
 

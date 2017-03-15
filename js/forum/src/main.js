@@ -1,7 +1,7 @@
 import { extend } from 'flarum/extend';
 import CommentPost from 'flarum/components/CommentPost';
 
-app.initializers.add('cosname/katex', function() {
+app.initializers.add('cosname-katex', function() {
   // on every post loading
   extend(CommentPost.prototype, 'config', function() {
 
