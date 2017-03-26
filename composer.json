@@ -2,7 +2,12 @@
     "name": "cosname/flarum-katex",
     "description": "Flarum plugin to render LaTeX expressions using KaTeX.",
     "type": "flarum-extension",
-    "keywords": ["latex", "math", "expressions", "katex"],
+    "keywords": [
+        "latex",
+        "math",
+        "expressions",
+        "katex"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -11,7 +16,8 @@
         }
     ],
     "require": {
-        "flarum/core": "^0.1.0-beta.6"
+        "flarum/core": "^0.1.0-beta.6",
+        "cosname/flarum-post-formatter": "*@dev"
     },
     "autoload": {
         "psr-4": {
