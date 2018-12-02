@@ -1,12 +1,12 @@
 <?php
 /*
 * Copyright (c) Flagrow
-* Copyright (c) 2017 Yixuan Qiu
+* Copyright (c) 2017-2018 Yixuan Qiu
 */
 
 namespace Cosname\Listener;
 
-use Flarum\Event\PostWillBeSaved;
+use Flarum\Post\Event\Saving;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class FindLatexExpressions
@@ -18,19 +18,19 @@ class FindLatexExpressions
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(PostWillBeSaved::class, [$this, 'findExpressions']);
+        $events->listen(Saving::class, [$this, 'findExpressions']);
     }
 
     /**
      * This function searches for LaTeX expressions, delimited by \(\), \[\], or $$.
-     * It then adds backticks (``) around the expression, so that is does not
+     * It then adds special <code> tags around the expression, so that is does not
      * get modifed by Markdown or BBcode.
      *
-     * @param PostWillBeSaved $event
+     * @param Saving $event
      */
-    public function findExpressions(PostWillBeSaved $event)
+    public function findExpressions(Saving $event)
     {
-        // Get the text from the post, comment or answer
+        // Get the text from the post, comment, or answer
         $text = $event->post->content;
         // Matching $$...$$. To check what it does use regex101.com
         $regex = '/(?<!\\\\)(?: ((?<!\\$)(?<!\\`)(?<!\\`\\n)(?<!>)\\$\\$(?!\\n\\`)(?!\\`)(?!\\$)))(.*(?R)?.*)(?<!\\\\)(?: ((?<!\\$)(?<!\\`)(?<!\\`\\n)\\1(?!\\n\\`)(?!\\`)(?!\\$)(?!<)))/mxU';
