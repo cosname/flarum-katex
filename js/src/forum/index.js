@@ -19,7 +19,7 @@ app.initializers.add('cosname-katex', function() {
       "ignoredTags":["script", "noscript", "style", "textarea", "pre", "code"],
       // those are the delimiters we are going to use to write latex formulas
       "delimiters":[
-        {left: "$$", right: "$$", display: true},
+        {left: "$$",  right: "$$",  display: true},
         {left: "\\[", right: "\\]", display: true},
         {left: "\\(", right: "\\)", display: false}
       ]
