@@ -4,7 +4,7 @@ import TextEditor from 'flarum/components/TextEditor';
 
 app.initializers.add('cosname-katex', function() {
   // render math expression on every post loading
-  extend(CommentPost.prototype, 'config', function() {
+  extend(CommentPost.prototype, 'oncreate', function() {
 
     // remove the <code> tags that enclose KaTeX
     // (we added <code class="katex-escape"> tags on LaTeX expressions when saving the post)
@@ -28,10 +28,10 @@ app.initializers.add('cosname-katex', function() {
   });
 
   // remove the <code class="katex-escape"> tags in editor
-  extend(TextEditor.prototype, 'init', function() {
+  extend(TextEditor.prototype, 'oninit', function() {
 
     // get the current text
-    var text = this.value();
+    var text = this.value;
     const tag1 = '<code class="katex-escape">';
     const len1 = tag1.length;
     const tag2 = '</code>';
@@ -39,13 +39,13 @@ app.initializers.add('cosname-katex', function() {
 
     var i = text.indexOf(tag1);
     // recursively remove tags
-    while (i > 0) {
+    while (i >= 0) {
       text = text.slice(0, i) + text.slice(i + len1);
       var j = text.indexOf(tag2);
-      if (j > 0)  text = text.slice(0, j) + text.slice(j + len2);
+      if (j >= 0)  text = text.slice(0, j) + text.slice(j + len2);
       i = text.indexOf(tag1);
     }
-    this.value(text);
+    this.value = text;
 
   });
 
