@@ -23,7 +23,6 @@ return [
         }),
     
     // Add listener
-    function (Dispatcher $events) {
-        $events->subscribe(Listener\FindLatexExpressions::class);
-    }
+    (new Extend\Event)
+        ->subscribe(Listener\FindLatexExpressions::class)
 ];
